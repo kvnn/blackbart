@@ -1,6 +1,6 @@
 Black Bart
 ----------
-# PROBLEM
+## PROBLEM
 I don't like trawling through email lists that I'm not taking part in, but I like reading what smart people have to say about technical things. 
 
 ## Solution
@@ -14,11 +14,17 @@ To achieve the goal, I've created a Django app with the following components:
 ## TODO:
 1. Move Reddit authentication to OAuth: https://www.reddit.com/comments/2ujhkr/
 
-## Requirements
+## Quick Start
 1. Install virtualenvwrapper
 2. `mkvirtualenv blackbart`
+3. Clone the blackbart directory w/ something like `git clone `https://github.com/kvnn/blackbart.git
 3. Go into the blackbart directory in your terminal
 4. `pip install -r requirements.txt`
+5. Set up a database and include the connection info in .env
+6. Create your subreddit, and include the credential info in .env
+6. `python manage.py mine`
+7. `python manage.py submissions_to_reddit`
+8. `python manage.py comments_to_reddit`
 
 ## Architecture
 ### .env file
@@ -46,7 +52,7 @@ If you fork this and change the name, do a global search & replace for "blackbar
 I've included an api and some endpoints for convenience after running the miner. After running the miner, I like to visit /api/v1.0/messages/top-level/new/ to see new top-level messages and /api/v1.0/messages/new/ to see all new messages. I then visit them again after running the reddit-submission-submitter and the reddit-comment-submitter.
 
 ### Miner
-The miner app uses spiders.py to scrape the mailing list url in question, and then saves the messages (or not) in pipelines.py. This app also contains the Message model. It uses the a management command to do this: `python manage.py mine`
+The miner app uses the (mine)[blob/master/blackbart/apps/miner/management/commands/mine.py] Django management command to scrape the mailing list specified in .env. The scraping is done by a Scrapy spider in (spiders.py)[blob/master/blackbart/apps/miner/scraper/spiders.py], which sends data to (pipelines.py)[blob/master/blackbart/apps/miner/scraper/pipelines.py] for saving.
 
 ### Distributor
-This app is for posting Message objects to Reddit, and saving SubredditSubmission and SubredditComment objects upon success. It has two management commands: `python manage.py submissions_to_reddit` && `python manage.py comments_to_reddit`.
+The distributor uses the (submissions_to_reddit)[blob/master/blackbart/apps/distributor/management/commands/submissions_to_reddit.py] & (comments_to_reddit)[blob/master/blackbart/apps/distributor/management/commands/comments_to_reddit.py] Django management commands to post submissions and comments to the subreddit specified in .env, respectively.
