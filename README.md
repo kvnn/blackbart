@@ -52,7 +52,7 @@ If you fork this and change the name, do a global search & replace for "blackbar
 I've included an api and some endpoints for convenience after running the miner. After running the miner, I like to visit /api/v1.0/messages/top-level/new/ to see new top-level messages and /api/v1.0/messages/new/ to see all new messages. I then visit them again after running the reddit-submission-submitter and the reddit-comment-submitter.
 
 ### Miner
-The miner app uses the [mine](blob/master/blackbart/apps/miner/management/commands/mine.py) Django management command to scrape the mailing list specified in .env. The scraping is done by a Scrapy spider in [spiders.py](blob/master/blackbart/apps/miner/scraper/spiders.py), which sends data to [pipelines.py](blob/master/blackbart/apps/miner/scraper/pipelines.py) for saving.
+The miner app uses the [mine](blackbart/apps/miner/management/commands/mine.py) Django management command to scrape the mailing list specified in .env. The scraping is done by a Scrapy spider in [spiders.py](blackbart/apps/miner/scraper/spiders.py), which sends data to [pipelines.py](blackbart/apps/miner/scraper/pipelines.py) for saving.
 
 ### Distributor
-The distributor uses the [submissions_to_reddit](blob/master/blackbart/apps/distributor/management/commands/submissions_to_reddit.py) & [comments_to_reddit](blob/master/blackbart/apps/distributor/management/commands/comments_to_reddit.py) Django management commands to post submissions and comments to the subreddit specified in .env, respectively.
+The distributor uses the [submissions_to_reddit](blackbart/apps/distributor/management/commands/submissions_to_reddit.py) & [comments_to_reddit](blackbart/apps/distributor/management/commands/comments_to_reddit.py) Django management commands to post submissions and comments to the subreddit specified in .env, respectively.
