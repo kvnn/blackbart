@@ -21,10 +21,12 @@ To achieve the goal, I've created a Django app with the following components:
 3. Go into the blackbart directory in your terminal
 4. `pip install -r requirements.txt`
 5. Set up a database and include the connection info in .env
-6. Create your subreddit, and include the credential info in .env
-6. `python manage.py mine`
-7. `python manage.py submissions_to_reddit`
-8. `python manage.py comments_to_reddit`
+6. `python manage.py makemigrations`
+7. `python manage.py migrate`
+8. Create your subreddit, and include the credential info in .env
+9. `python manage.py mine`
+10. `python manage.py submissions_to_reddit`
+11. `python manage.py comments_to_reddit`
 
 ## Architecture
 ### .env file
